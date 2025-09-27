@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package authorization.v1;
+
+service Authorization {
+  rpc CheckAccess(CheckAccessRequest) returns (CheckAccessResponse);
+}
+
+enum AccessLevel {
+  ACCESS_LEVEL_NONE = 0;
+  ACCESS_LEVEL_READ = 1;
+  ACCESS_LEVEL_WRITE = 2;
+}
+
+message CheckAccessRequest {
+  // user_id is a UUID (16 bytes)
+  bytes user_id = 1;
+  // resource_ids are UUIDs (16 bytes each)
+  repeated bytes resource_ids = 2;
+}
+
+message ResourceAccess {
+  // resource_id is a UUID (16 bytes)
+  bytes resource_id = 1;
+  AccessLevel access_level = 2;
+}
+
+message CheckAccessResponse {
+  repeated ResourceAccess resource_accesses = 1;
+}

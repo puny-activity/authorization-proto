@@ -2,9 +2,9 @@
 
 !/.gitignore
 
+!*.proto
+
 !README.md
 !LICENSE
-
-!authorization.proto
 
 !*/
